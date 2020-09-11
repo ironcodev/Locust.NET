@@ -8,10 +8,8 @@
         {
             get
             {
-                if (_instance == null)
-                {
-                    _instance = new TImplementation();
-                }
+                TypeHelper.EnsureInitialized<TAbstraction, TImplementation>(ref _instance);
+
                 return _instance;
             }
             set { _instance = value; }

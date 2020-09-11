@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace Locust.Base
 {
-    public class AnyComparer : IComparer
+    public interface IAnyComparer: IComparer { }
+    public class AnyComparer : InstanceProvider<IAnyComparer, DefaultAnyComparer>
+    { }
+    public class DefaultAnyComparer: IAnyComparer
     {
         public int Compare(object x, object y)
         {
@@ -32,23 +35,31 @@ namespace Locust.Base
 
             if (xc != null)
             {
-                return xc.CompareTo(y);
+                try
+                {
+                    return xc.CompareTo(y);
+                }
+                catch
+                {
+                    return xc.CompareTo(System.Convert.ChangeType(y, x.GetType()));
+                }
+            }
+
+            var yc = y as IComparable;
+
+            if (yc != null)
+            {
+                try
+                {
+                    return yc.CompareTo(x);
+                }
+                catch
+                {
+                    return yc.CompareTo(System.Convert.ChangeType(x, y.GetType()));
+                }
             }
 
             return x.Equals(y) ? 0 : x.GetHashCode().CompareTo(y.GetHashCode());
-        }
-        private static AnyComparer instance;
-        public static AnyComparer Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AnyComparer();
-                }
-
-                return instance;
-            }
         }
     }
 }

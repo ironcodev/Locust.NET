@@ -16,7 +16,33 @@
     <PackageTags>Locust.NET</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <Copyright>MIT</Copyright>
-    <PackageProjectUrl>https://github.com/ironcodev/Locust.NET</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/ironcodev/Locust.NET/tree/master/Library/Locust.Base</PackageProjectUrl>
+    <Description>This library contains basic utilities and type helpers. It also holds some multi-purpose attributes such as Ignore and Size that could be leveraged by other libraries for their own purpose. Locust.Base depends on no other library and is standalone.
+
+Helper classes:
+    TypeHelper: a helper class with static type properties for primitive and most-used types.
+
+    InstanceProvider&lt;TAbstraction, TImplementation&gt;: a once for all singleton instance provider.
+
+    AnyComparer: a utility comparer class that is able to compare anything with anything safely using its singleton IComparer instance. The default instance is of type DefaultAnyComparer that checks whether any of the two arguments or both of them are null. If so, the result is specified based on the rule 'null equals with null, but is less than any not-null value'. If both of them are not null, it tries to cast either of the arguments to IComparable and use their CompareTo() method. If none implements IComparable, it falls back to comparing their GetHashCode() at the end.
+
+Attributes:
+   Ignore: applies to anything and implies that the target should be ignored (based on the usage)
+   Size: applies to properties to denote a size or length attribute.
+   EnumDefault: applies to enums and is used to specify a default value for the enum.
+
+TypeHelper methods:
+   TAbstraction EnsureInitialized&lt;TAbstraction, TConcretion&gt;(ref TAbstraction value, bool threadSafe = false):
+       a utility method to -safely- instantiate and return an implementation for a given abstraction.
+  Type FindType(string typename)
+      searches current appdomain's assemblies for a type based on its string name.
+  IEnumerable&lt;T&gt; GetValues&lt;T&gt;()
+    converts list of values in an enum of type T into an IEnumerable&lt;T&gt;
+  object FindTypeAndInstantiate(string typename, params object[] args)
+    looks for the given type based on its name in current appdomain's assemblies and instantiates from it using the given arguments (passes the arguments to the found type constructor).
+   object FindTypeAndTryInstantiate(string typename, params object[] args)
+      performs the same as FindTypeAndInstantiate() except that it handles exceptions using a try/catch when instantiating object to prevent errors.
+</Description>
   </PropertyGroup>
   <ItemGroup>
     <None Include="..\..\LICENSE">

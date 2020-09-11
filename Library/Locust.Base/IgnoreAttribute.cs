@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Locust.Base
 {
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class IgnoreAttribute : Attribute
     {
     }

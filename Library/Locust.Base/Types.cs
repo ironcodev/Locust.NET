@@ -119,89 +119,15 @@ namespace Locust.Base
     }
     public static partial class TypeHelper
     {
-        //public static bool IsNumeric(object x)
-        //{
-        //    var result = false;
-
-        //    if (x != null)
-        //    {
-        //        var type = x.GetType();
-
-        //        if (type == TypeOfInt16 ||
-        //            type == TypeOfInt32 ||
-        //            type == TypeOfInt64 ||
-        //            type == TypeOfUInt16 ||
-        //            type == TypeOfUInt32 ||
-        //            type == TypeOfUInt64 ||
-        //            type == TypeOfSingle ||
-        //            type == TypeOfDouble ||
-        //            type == TypeOfDecimal ||
-        //            type == TypeOfByte ||
-        //            type == TypeOfSByte)
-        //        {
-        //            result = true;
-        //        }
-        //    }
-
-        //    return result;
-        //}
-        
         public static IEnumerable<T> GetValues<T>() where T : struct, IConvertible
         {
-            //return Enum.GetValues(typeof(System.T)).Cast<T>();
-            var type = typeof (T);
+            var type = typeof(T);
 
             if (type.IsEnum)
                 return Enum.GetValues(type).Cast<T>();
             else
                 throw new ArgumentException(string.Format("{0} is not an enum", type));
         }
-
-        //public static bool IsNamespaceDefined(string nameSpace)
-        //{
-        //    return
-        //        (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-        //        from type in assembly.GetTypes()
-        //        where type.Namespace == nameSpace
-        //        select type).Any();
-        //}
-        //public static bool IsTypeDefined(string nameSpace, string className)
-        //{
-        //    return (from assembly in AppDomain.CurrentDomain.GetAssemblies()
-        //        from type in assembly.GetTypes()
-        //        where type.Name == className && type.GetMethods().Any()
-        //        select type).FirstOrDefault() != null;
-        //}
-        //public static bool DescendsFrom(object obj, Type targetType)
-        //{
-        //    var result = false;
-
-        //    if (obj == null) throw new ArgumentNullException("obj");
-        //    if (targetType == null) throw new ArgumentNullException("targetType");
-
-        //    var type = obj.GetType();
-        //    result = type.IsSubclassOf(targetType);
-
-        //    if (!result)
-        //    {
-        //        if (targetType.IsGenericTypeDefinition)
-        //        {
-        //            while (type != TypeHelper.TypeOfObject && type != null)
-        //            {
-        //                if (type.IsGenericType && type.GetGenericTypeDefinition() == targetType)
-        //                {
-        //                    result = true;
-        //                    break;
-        //                }
-
-        //                type = type.BaseType;
-        //            }
-        //        }
-        //    }
-
-        //    return result;
-        //}
-
         public static object CreateInstance(Type type)
         {
             object result = null;
