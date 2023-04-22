@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Threading;
-using System.Web;
 
 namespace Locust.Base
 {
     public static partial class TypeHelper
     {
+        #region Type Properties
         public static Type TypeOfInt16 { get; private set; }
         public static Type TypeOfShort { get { return TypeOfInt16; } }
         public static Type TypeOfInt32 { get; private set; }
@@ -38,9 +34,13 @@ namespace Locust.Base
         public static Type TypeOfDateTimeOffset { get; private set; }
         public static Type TypeOfTimeSpan { get; private set; }
         public static Type TypeOfByteArray { get; private set; }
+        public static Type TypeOfCharArray { get; private set; }
         public static Type TypeOfNullable { get; private set; }
         public static Type TypeOfObject { get; private set; }
-        public static Type TypeOfIListOfT { get; private set; }
+        public static Type TypeOfIGenericList { get; private set; }
+        public static Type TypeOfGenericList { get; private set; }
+        public static Type TypeOfIGenericDictionary { get; private set; }
+        public static Type TypeOfGenericDictionary { get; private set; }
         public static Type TypeOfIEnumerableOfT { get; private set; }
         public static Type TypeOfIEnumerable { get; private set; }
         public static Type TypeOfException { get; private set; }
@@ -65,11 +65,15 @@ namespace Locust.Base
         public static Type TypeOfNullableChar { get; private set; }
         public static Type TypeOfNullableSByte { get; private set; }
         public static Type TypeOfNullableBool { get; private set; }
+        public static Type TypeOfNullableBigInteger { get; private set; }
         public static Type TypeOfNullableDateTime { get; private set; }
         public static Type TypeOfNullableDateTimeOffset { get; private set; }
         public static Type TypeOfNullableTimeSpan { get; private set; }
+        public static Type TypeOfNullableGuid { get; private set; }
+        #endregion
         static TypeHelper()
         {
+            #region initialize Type Properties
             TypeOfInt16 = typeof(System.Int16);
             TypeOfInt32 = typeof(System.Int32);
             TypeOfInt64 = typeof(System.Int64);
@@ -86,13 +90,18 @@ namespace Locust.Base
             TypeOfChar = typeof(System.Char);
             TypeOfString = typeof(System.String);
             TypeOfGuid = typeof(System.Guid);
+            TypeOfNullableGuid = typeof(System.Guid?);
             TypeOfDateTime = typeof(System.DateTime);
             TypeOfDateTimeOffset = typeof(System.DateTimeOffset);
             TypeOfTimeSpan = typeof(System.TimeSpan);
             TypeOfByteArray = typeof(System.Byte[]);
+            TypeOfCharArray = typeof(System.Char[]);
             TypeOfNullable = typeof(System.Nullable<>);
             TypeOfObject = typeof(object);
-            TypeOfIListOfT = typeof(System.Collections.Generic.IList<>);
+            TypeOfIGenericList = typeof(System.Collections.Generic.IList<>);
+            TypeOfGenericList = typeof(System.Collections.Generic.List<>);
+            TypeOfIGenericDictionary = typeof(System.Collections.Generic.IDictionary<,>);
+            TypeOfGenericDictionary = typeof(System.Collections.Generic.Dictionary<,>);
             TypeOfIEnumerable = typeof(System.Collections.IEnumerable);
             TypeOfIEnumerableOfT = typeof(System.Collections.Generic.IEnumerable<>);
             TypeOfException = typeof(System.Exception);
@@ -114,8 +123,8 @@ namespace Locust.Base
             TypeOfNullableDateTime = typeof(System.Nullable<System.DateTime>);
             TypeOfNullableDateTimeOffset = typeof(System.Nullable<System.DateTimeOffset>);
             TypeOfNullableTimeSpan = typeof(System.Nullable<System.TimeSpan>);
+            #endregion
         }
-
     }
     public static partial class TypeHelper
     {
@@ -128,21 +137,7 @@ namespace Locust.Base
             else
                 throw new ArgumentException(string.Format("{0} is not an enum", type));
         }
-        public static object CreateInstance(Type type)
-        {
-            object result = null;
-            
-            if (type.IsClass && !type.IsAbstract)
-            {
-                var ctor = type.GetConstructor(Type.EmptyTypes);
-                var newExp = Expression.New(ctor);
-                var lambda = Expression.Lambda<Func<object>>(newExp);
 
-                result = lambda.Compile().Invoke();
-            }
-
-            return result;
-        }
         public static Type FindType(string typename)
         {
             var result = Type.GetType(typename);
@@ -160,32 +155,33 @@ namespace Locust.Base
 
             return result;
         }
-        public static object FindTypeAndInstantiate(string typename, params object[] args)
+        public static object FindTypeAndActivate(string typename, params object[] args)
         {
-            var result = null as object;
             var type = FindType(typename);
-            
-            if (type != null)
-            {
-                result = Activator.CreateInstance(type, args);
-            }
+            var result = ObjectActivator.Instance.Activate(type, args);
 
             return result;
         }
-        public static object FindTypeAndTryInstantiate(string typename, params object[] args)
+        public static object FindTypeAndSafeActivate(string typename, params object[] args)
         {
-            var result = null as object;
-
-            try
-            {
-                result = FindTypeAndInstantiate(typename, args);
-            }
-            catch (Exception)
-            {
-            }
+            var type = FindType(typename);
+            var result = ObjectActivator.Instance.SafeActivate(type, args);
 
             return result;
         }
+        public static bool FindTypeAndTryActivate(string typename, out object result, params object[] args)
+        {
+            var type = FindType(typename);
+
+            return ObjectActivator.Instance.TryActivate(type, out result, args);
+        }
+        public static bool FindTypeAndTryActivate(string typename, out object result, out Exception exception, params object[] args)
+        {
+            var type = FindType(typename);
+
+            return ObjectActivator.Instance.TryActivate(type, out result, out exception, args);
+        }
+
         public static TAbstraction EnsureInitialized<TAbstraction, TConcretion>(ref TAbstraction value, bool threadSafe = false)
             where TConcretion : TAbstraction, new()
         {
@@ -193,9 +189,9 @@ namespace Locust.Base
             {
                 if (threadSafe)
                     Monitor.Enter(AppDomain.CurrentDomain);
-                
+
                 value = new TConcretion();
-                
+
                 if (threadSafe)
                     Monitor.Exit(AppDomain.CurrentDomain);
             }
