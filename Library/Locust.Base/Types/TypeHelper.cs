@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Threading;
 
@@ -70,6 +71,23 @@ namespace Locust.Base
         public static Type TypeOfNullableDateTimeOffset { get; private set; }
         public static Type TypeOfNullableTimeSpan { get; private set; }
         public static Type TypeOfNullableGuid { get; private set; }
+
+        public static Type TypeOfSqlBinary { get; private set; }
+        public static Type TypeOfSqlBoolean { get; private set; }
+        public static Type TypeOfSqlByte { get; private set; }
+        public static Type TypeOfSqlBytes { get; private set; }
+        public static Type TypeOfSqlChars { get; private set; }
+        public static Type TypeOfSqlDateTime { get; private set; }
+        public static Type TypeOfSqlDecimal { get; private set; }
+        public static Type TypeOfSqlDouble { get; private set; }
+        public static Type TypeOfSqlGuid { get; private set; }
+        public static Type TypeOfSqlInt16 { get; private set; }
+        public static Type TypeOfSqlInt32 { get; private set; }
+        public static Type TypeOfSqlInt64 { get; private set; }
+        public static Type TypeOfSqlMoney { get; private set; }
+        public static Type TypeOfSqlSingle { get; private set; }
+        public static Type TypeOfSqlString { get; private set; }
+        public static Type TypeOfSqlXml { get; private set; }
         #endregion
         static TypeHelper()
         {
@@ -123,6 +141,23 @@ namespace Locust.Base
             TypeOfNullableDateTime = typeof(System.Nullable<System.DateTime>);
             TypeOfNullableDateTimeOffset = typeof(System.Nullable<System.DateTimeOffset>);
             TypeOfNullableTimeSpan = typeof(System.Nullable<System.TimeSpan>);
+
+            TypeOfSqlBinary = typeof(SqlBinary);
+            TypeOfSqlBoolean = typeof(SqlBoolean);
+            TypeOfSqlByte = typeof(SqlByte);
+            TypeOfSqlBytes = typeof(SqlBytes);
+            TypeOfSqlChars = typeof(SqlChars);
+            TypeOfSqlDateTime = typeof(SqlDateTime);
+            TypeOfSqlDecimal = typeof(SqlDecimal);
+            TypeOfSqlDouble = typeof(SqlDouble);
+            TypeOfSqlGuid = typeof(SqlGuid);
+            TypeOfSqlInt16 = typeof(SqlInt16);
+            TypeOfSqlInt32 = typeof(SqlInt32);
+            TypeOfSqlInt64 = typeof(SqlInt64);
+            TypeOfSqlMoney = typeof(SqlMoney);
+            TypeOfSqlSingle = typeof(SqlSingle);
+            TypeOfSqlString = typeof(SqlString);
+            TypeOfSqlXml = typeof(SqlXml);
             #endregion
         }
     }
