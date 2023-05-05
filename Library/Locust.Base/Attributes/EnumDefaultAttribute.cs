@@ -5,9 +5,9 @@ namespace Locust.Base
     [AttributeUsage(AttributeTargets.Enum, AllowMultiple = false)]
     public class EnumDefaultAttribute: Attribute
     {
-        private string value;
-        public string Value { get {  return value; } }
-        public EnumDefaultAttribute(string value)
+        private object value;
+        public object Value { get {  return value; } }
+        public EnumDefaultAttribute(object value)
         {
             this.value = value;
         }
