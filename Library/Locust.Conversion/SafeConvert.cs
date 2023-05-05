@@ -2247,5 +2247,124 @@ string_value:
         {
             return (Math.PI / 180) * degrees;
         }
+        public object ToEnum(object value, Type type, bool ignoreCase = true, bool autoDefault = true)
+        {
+            object result = null;
+
+            do
+            {
+                if (value != null)
+                {
+                    var valueType = value.GetType();
+
+                    if (valueType == type)
+                    {
+                        result = value;
+                        break;
+                    }
+
+                    if (valueType == TypeHelper.TypeOfString || valueType == TypeHelper.TypeOfSqlString)
+                    {
+                        var valueString = value.ToString();
+
+                        if (!string.IsNullOrWhiteSpace(valueString))
+                        {
+                            try
+                            {
+                                result = Enum.Parse(type, valueString, ignoreCase);
+                            }
+                            catch
+                            { }
+                        }
+
+                        break;
+                    }
+
+                    if (!(valueType.IsPrimitive
+                            || valueType.IsEnum
+                            || valueType == TypeHelper.TypeOfDecimal
+                            || type == TypeHelper.TypeOfSqlBinary
+                            || type == TypeHelper.TypeOfSqlByte
+                            || type == TypeHelper.TypeOfSqlDecimal
+                            || type == TypeHelper.TypeOfSqlDouble
+                            || type == TypeHelper.TypeOfSqlInt16
+                            || type == TypeHelper.TypeOfSqlInt32
+                            || type == TypeHelper.TypeOfSqlInt64
+                            || type == TypeHelper.TypeOfSqlMoney
+                            || type == TypeHelper.TypeOfSqlSingle
+                            ))
+                    {
+                        break;
+                    }
+
+                    var enumType = Enum.GetUnderlyingType(type);
+                    object _value = null;
+
+                    if (enumType == TypeHelper.TypeOfByte)
+                    {
+                        _value = ToByte(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfSByte)
+                    {
+                        _value = ToSByte(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt16)
+                    {
+                        _value = ToInt16(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt16)
+                    {
+                        _value = ToUInt16(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt32)
+                    {
+                        _value = ToInt32(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt32)
+                    {
+                        _value = ToUInt32(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt64)
+                    {
+                        _value = ToInt64(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt64)
+                    {
+                        _value = ToUInt64(value);
+                    }
+
+                    if (Enum.IsDefined(type, _value))
+                    {
+                        result = Enum.ToObject(type, value);
+                    }
+
+                    break;
+                }
+
+                if (autoDefault)
+                {
+                    var defaultAttribute = (DefaultAttribute)Attribute.GetCustomAttribute(type, typeof(DefaultAttribute));
+
+                    if (defaultAttribute != null && defaultAttribute.Value != null)
+                    {
+                        result = ToEnum(defaultAttribute.Value, type, ignoreCase, false);
+                    }
+                }
+            } while (false);
+
+            if (result == null && autoDefault)
+            {
+                result = ObjectActivator.Instance.SafeActivate(type);
+            }
+
+            return result;
+        }
     }
 }

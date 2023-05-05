@@ -50,5 +50,6 @@ namespace Locust.Conversion
         ushort ToUShort(object x, ushort @default = 0);
         ushort? ToUShortNullable(object x, ushort? @default = null);
         object Convert(object value, Type target, object @default = default);
+        object ToEnum(object value, Type type, bool ignoreCase = true, bool autoDefault = true);
     }
 }

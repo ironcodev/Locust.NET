@@ -8,10 +8,11 @@ namespace Locust.Conversion
     {
         bool IsValid(object x, bool assumeAllWhitespaceAsValid = false)
         {
-            var s = x?.ToString();
 
             if (x == null || DBNull.Value.Equals(x))
                 return false;
+
+            var s = x?.ToString();
 
             if (string.IsNullOrWhiteSpace(s))
                 return assumeAllWhitespaceAsValid;
@@ -25,15 +26,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToInt64(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt64(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -44,15 +42,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToInt32(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt32(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -63,15 +58,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToInt16(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt16(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -82,15 +74,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToDecimal(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDecimal(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -101,15 +90,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToDouble(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDouble(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -120,34 +106,28 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToSingle(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToSingle(x);
+                }
+                catch
+                { }
             }
 
             return result;
         }
-        public String ToString(object x, String @default = default)
+        public String ToString(object x, String @default = "")
         {
             string result = @default;
 
             if (IsValid(x, false))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToString(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToString(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -158,15 +138,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToChar(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToChar(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -177,15 +154,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToByte(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToByte(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -196,15 +170,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToSByte(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToSByte(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -340,15 +311,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToDateTime(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDateTime(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -359,15 +327,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        System.Guid.TryParse(x.ToString(), out result);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    System.Guid.TryParse(x.ToString(), out result);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -378,15 +343,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToUInt64(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt64(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -397,15 +359,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToUInt32(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt32(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -416,15 +375,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        result = System.Convert.ToUInt16(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt16(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -461,61 +417,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Int64)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Int64)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Int64)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Int64)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Int64)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Int64)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Int64)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Int64)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Int64.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToInt64(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt64(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -526,61 +433,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Int32)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Int32)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Int32)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Int32)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Int32)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Int32)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Int32)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Int32)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Int32.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToInt32(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt32(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -591,61 +449,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Int16)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Int16)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Int16)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Int16)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Int16)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Int16)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Int16)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Int16)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Int16.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToInt16(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToInt16(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -656,61 +465,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Decimal)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Decimal)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Decimal)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Decimal)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Decimal)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Decimal)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Decimal)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Decimal)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Decimal.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToDecimal(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDecimal(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -721,61 +481,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Double)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Double)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Double)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Double)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Double)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Double)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Double)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Double)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Double.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToDouble(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDouble(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -786,61 +497,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Single)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Single)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Single)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Single)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Single)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Single)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Single)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Single)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Single.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToSingle(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToSingle(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -851,60 +513,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Char)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Char)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Char)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Char)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Char)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Char)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Char)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Char)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Char.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToChar(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToChar(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -915,61 +529,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (Byte)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (Byte)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (Byte)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (Byte)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (Byte)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (Byte)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (Byte)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (Byte)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = Byte.Parse(((SqlString)x).Value);
-                            break;
-                        }
-
-                        result = System.Convert.ToByte(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToByte(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -980,60 +545,12 @@ namespace Locust.Conversion
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (SByte)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (SByte)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (SByte)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (SByte)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (SByte)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (SByte)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (SByte)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (SByte)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = SByte.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToSByte(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToSByte(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1048,51 +565,6 @@ namespace Locust.Conversion
                 {
                     try
                     {
-                        if (x is SqlInt64)
-                        {
-                            result = ((SqlInt64)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = ((SqlInt32)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = ((SqlInt16)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = ((SqlByte)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = ((SqlDecimal)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = ((SqlDouble)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = ((SqlSingle)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = ((SqlMoney)x).Value != 0;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            x = ((SqlString)x).Value.Trim();
-                            goto string_value;
-                        }
                         if (x is Int64)
                         {
                             result = ((Int64)x) != 0;
@@ -1153,7 +625,6 @@ namespace Locust.Conversion
                             result = ((Char)x) == 'y' || ((Char)x) == 'Y';
                             break;
                         }
-string_value:
                         if (x is String)
                         {
                             var s = x.ToString().Trim();
@@ -1169,6 +640,7 @@ string_value:
                             else
                             {
                                 double d;
+
                                 if (double.TryParse(s, out d))
                                 {
                                     if (d != 0)
@@ -1180,6 +652,7 @@ string_value:
                                 else
                                 {
                                     decimal c;
+
                                     if (decimal.TryParse(s, out c))
                                     {
                                         if (c != 0)
@@ -1212,25 +685,12 @@ string_value:
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlDateTime)
-                        {
-                            result = (DateTime)((SqlDateTime)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = DateTime.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToDateTime(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToDateTime(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1241,33 +701,17 @@ string_value:
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
+                    Guid g;
+
+                    if (Guid.TryParse(x.ToString(), out g))
                     {
-                        if (x is SqlGuid)
-                        {
-                            result = (Guid)((SqlGuid)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            Guid r;
-                            if (Guid.TryParse(((SqlString)x).Value, out r))
-                            {
-                                result = r;
-                            }
-                            break;
-                        }
-                        Guid g;
-                        if (Guid.TryParse(x.ToString(), out g))
-                        {
-                            result = g;
-                        }
+                        result = g;
                     }
-                    catch
-                    { }
-                } while (false);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1278,60 +722,12 @@ string_value:
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (UInt64)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (UInt64)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (UInt64)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (UInt64)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (UInt64)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (UInt64)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (UInt64)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (UInt64)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = UInt64.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToUInt64(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt64(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1342,60 +738,12 @@ string_value:
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (UInt32)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (UInt32)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (UInt32)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (UInt32)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (UInt32)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (UInt32)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (UInt32)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (UInt32)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = UInt32.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToUInt32(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt32(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1406,60 +754,12 @@ string_value:
 
             if (IsValid(x))
             {
-                do
+                try
                 {
-                    try
-                    {
-                        if (x is SqlInt64)
-                        {
-                            result = (UInt16)((SqlInt64)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt32)
-                        {
-                            result = (UInt16)((SqlInt32)x).Value;
-                            break;
-                        }
-                        if (x is SqlInt16)
-                        {
-                            result = (UInt16)((SqlInt16)x).Value;
-                            break;
-                        }
-                        if (x is SqlByte)
-                        {
-                            result = (UInt16)((SqlByte)x).Value;
-                            break;
-                        }
-                        if (x is SqlDecimal)
-                        {
-                            result = (UInt16)((SqlDecimal)x).Value;
-                            break;
-                        }
-                        if (x is SqlDouble)
-                        {
-                            result = (UInt16)((SqlDouble)x).Value;
-                            break;
-                        }
-                        if (x is SqlSingle)
-                        {
-                            result = (UInt16)((SqlSingle)x).Value;
-                            break;
-                        }
-                        if (x is SqlMoney)
-                        {
-                            result = (UInt16)((SqlMoney)x).Value;
-                            break;
-                        }
-                        if (x is SqlString)
-                        {
-                            result = UInt16.Parse(((SqlString)x).Value);
-                            break;
-                        }
-                        result = System.Convert.ToUInt16(x);
-                    }
-                    catch
-                    { }
-                } while (false);
+                    result = System.Convert.ToUInt16(x);
+                }
+                catch
+                { }
             }
 
             return result;
@@ -1547,6 +847,116 @@ string_value:
         public double Deg2Rad(double degrees)
         {
             return (Math.PI / 180) * degrees;
+        }
+        public object ToEnum(object value, Type type, bool ignoreCase = true, bool autoDefault = true)
+        {
+            object result = null;
+
+            do
+            {
+                if (value != null)
+                {
+                    var valueType = value.GetType();
+
+                    if (valueType == type)
+                    {
+                        result = value;
+                        break;
+                    }
+
+                    if (valueType == TypeHelper.TypeOfString)
+                    {
+                        var valueString = value.ToString();
+
+                        if (!string.IsNullOrWhiteSpace(valueString))
+                        {
+                            try
+                            {
+                                result = Enum.Parse(type, valueString, ignoreCase);
+                            }
+                            catch
+                            { }
+                        }
+
+                        break;
+                    }
+
+                    if (!(valueType.IsPrimitive
+                            || valueType.IsEnum
+                            || valueType == TypeHelper.TypeOfDecimal
+                            ))
+                    {
+                        break;
+                    }
+
+                    var enumType = Enum.GetUnderlyingType(type);
+                    object _value = null;
+
+                    if (enumType == TypeHelper.TypeOfByte)
+                    {
+                        _value = ToByte(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfSByte)
+                    {
+                        _value = ToSByte(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt16)
+                    {
+                        _value = ToInt16(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt16)
+                    {
+                        _value = ToUInt16(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt32)
+                    {
+                        _value = ToInt32(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt32)
+                    {
+                        _value = ToUInt32(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfInt64)
+                    {
+                        _value = ToInt64(value);
+                    }
+                    else
+                    if (enumType == TypeHelper.TypeOfUInt64)
+                    {
+                        _value = ToUInt64(value);
+                    }
+
+                    if (Enum.IsDefined(type, _value))
+                    {
+                        result = Enum.ToObject(type, value);
+                    }
+
+                    break;
+                }
+
+                if (autoDefault)
+                {
+                    var defaultAttribute = (DefaultAttribute)Attribute.GetCustomAttribute(type, typeof(DefaultAttribute));
+
+                    if (defaultAttribute != null && defaultAttribute.Value != null)
+                    {
+                        result = ToEnum(defaultAttribute.Value, type, ignoreCase, false);
+                    }
+                }
+            } while (false);
+
+            if (result == null && autoDefault)
+            {
+                result = ObjectActivator.Instance.SafeActivate(type);
+            }
+
+            return result;
         }
     }
 }
