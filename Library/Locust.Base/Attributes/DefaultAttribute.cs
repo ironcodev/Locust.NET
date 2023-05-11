@@ -2,7 +2,7 @@
 
 namespace Locust.Base
 {
-    [AttributeUsage(AttributeTargets.Enum, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class DefaultAttribute: Attribute
     {
         private object value;
